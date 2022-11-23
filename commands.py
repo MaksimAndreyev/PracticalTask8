@@ -1,6 +1,14 @@
 import output
 
 
+def updateFile(dossiers):
+    with open('data.txt', 'w', encoding='utf8') as f:
+        result = []
+        for i in dossiers:
+            result.append(' '.join(i) + '\n')
+        f.writelines(result)
+
+
 def chooseCommand(request, dossiers):
     if request == 'список':
         output.printDossiers()
@@ -12,8 +20,10 @@ def chooseCommand(request, dossiers):
     elif request == 'добавить':
         employee = list(output.askInput('Введите данные нового сотрудника: ').split())
         dossiers.append(employee)
-        with open('data.txt', 'w', encoding='utf8') as f:
-            result = []
-            for i in dossiers:
-                result.append(' '.join(i)+'\n')
-            f.writelines(result)
+        updateFile(dossiers)
+    elif request == 'удалить':
+        name = output.askInput('Введите имя: ')
+        for i in dossiers:
+            if i[1] == name:
+                dossiers.remove(i)
+        updateFile(dossiers)
