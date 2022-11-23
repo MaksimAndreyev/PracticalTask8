@@ -19,11 +19,14 @@ def chooseCommand(request, dossiers):
                 print(*i)
     elif request == 'добавить':
         employee = list(output.askInput('Введите данные нового сотрудника: ').split())
+        for i in range(len(employee)):
+            employee[i] = employee[i].title()
         dossiers.append(employee)
         updateFile(dossiers)
     elif request == 'удалить':
-        name = output.askInput('Введите имя: ')
+        name = output.askInput('Введите имя: ').title()
         for i in dossiers:
             if i[1] == name:
                 dossiers.remove(i)
+                break
         updateFile(dossiers)

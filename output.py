@@ -1,5 +1,5 @@
 def askInput(message):
-    return input(message)
+    return input(message).lower()
 
 
 def printDossiers():
